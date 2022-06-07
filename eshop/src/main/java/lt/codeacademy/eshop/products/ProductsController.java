@@ -3,6 +3,7 @@ package lt.codeacademy.eshop.products;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigDecimal;
@@ -20,7 +21,13 @@ public class ProductsController {
     }
 
     @GetMapping("/create")
-    public String createProduct() {
+    public String openProductForm() {
         return "productForm";
+    }
+
+    @PostMapping("/create")
+    public String createProduct(Product product, Model model) {
+        model.addAttribute("products", Arrays.asList(product));
+        return "products";
     }
 }
