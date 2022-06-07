@@ -1,11 +1,9 @@
 package lt.codeacademy.eshop;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -27,6 +25,9 @@ public class DIExample {
 
         System.out.println("Pazymiu vidurkis: " +
                 springContext.getBean(GradeService.class).average());
+
+        System.out.println("-------------------" +
+                (springContext.getBean(GradeService.class) == springContext.getBean(GradeService.class)));
     }
 }
 
