@@ -3,6 +3,6 @@
         <title>Hello!</title>
     </head>
     <body>
-        <h1 th:text="${'Mano vardas: ' + param.name}">Mano vardas: </h1>
+        <h1 th:text="|Mano vardas: ${#strings.capitalize(param.name)}|">Mano vardas: </h1>
     </body>
 </html>
