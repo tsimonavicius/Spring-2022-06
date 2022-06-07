@@ -3,6 +3,7 @@ package lt.codeacademy.eshop;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -51,7 +52,6 @@ class GradeService {
     }
 }
 
-@Repository
 class GradeRepo {
 
     public List<Integer> getGrades() {
@@ -63,4 +63,8 @@ class GradeRepo {
 @Configuration
 class SpringContextConfig {
 
+    @Bean
+    public GradeRepo createGradeRepo() {
+        return new GradeRepo();
+    }
 }
