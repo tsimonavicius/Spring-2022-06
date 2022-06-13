@@ -33,7 +33,10 @@ public class ProductsController {
 
     @PostMapping("/create")
     public String createProduct(Product product, Model model) {
-        model.addAttribute("products", Arrays.asList(product));
+
+        productsService.createProduct(product);
+
+        model.addAttribute("products", productsService.getProducts());
         return "products";
     }
 }

@@ -12,6 +12,10 @@ public class ProductsService {
     private final ProductsRepository productsRepository;
 
     public List<Product> getProducts() {
-        return productsRepository.getProducts();
+        return productsRepository.getAll();
+    }
+
+    public void createProduct(Product product) {
+        productsRepository.save(product);
     }
 }
