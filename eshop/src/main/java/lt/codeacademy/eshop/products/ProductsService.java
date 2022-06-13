@@ -28,4 +28,9 @@ public class ProductsService {
 
         return productsRepository.getById(id);
     }
+
+    public void updateProduct(Product product) {
+
+        productsRepository.update(product);
+    }
 }

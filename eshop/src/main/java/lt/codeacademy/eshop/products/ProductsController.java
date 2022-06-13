@@ -50,4 +50,12 @@ public class ProductsController {
 
         return "productForm";
     }
+
+    @PostMapping("/{id}")
+    public String updateProduct(Product product, Model model) {
+
+        productsService.updateProduct(product);
+
+        return getProducts(model);
+    }
 }

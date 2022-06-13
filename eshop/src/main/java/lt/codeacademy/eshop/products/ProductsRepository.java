@@ -26,4 +26,18 @@ public class ProductsRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    public void update(Product product) {
+
+        Integer index = null;
+        for (int i = 0; i < productsList.size(); i++) {
+            if (productsList.get(i).getId().equals(product.getId())) {
+                index = i;
+            }
+        }
+
+        if (index != null) {
+            productsList.set(index, product);
+        }
+    }
 }
