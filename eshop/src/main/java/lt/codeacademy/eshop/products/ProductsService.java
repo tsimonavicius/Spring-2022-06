@@ -1,15 +1,17 @@
 package lt.codeacademy.eshop.products;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class ProductsService {
+
+    private final ProductsRepository productsRepository;
+
     public List<Product> getProducts() {
-        return Collections.singletonList(
-                new Product("iPhone 21", "This is a product description", new BigDecimal("1230.20")));
+        return productsRepository.getProducts();
     }
 }
