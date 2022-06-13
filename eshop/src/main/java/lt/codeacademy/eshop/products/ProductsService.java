@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @AllArgsConstructor
 @Service
@@ -16,6 +17,10 @@ public class ProductsService {
     }
 
     public void createProduct(Product product) {
+
+        UUID productId = UUID.randomUUID();
+        product.setId(productId);
+
         productsRepository.save(product);
     }
 }
