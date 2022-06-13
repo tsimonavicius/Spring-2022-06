@@ -23,7 +23,9 @@
                 <td th:text="${product.name}">Samsung S23</td>
                 <td th:text="${product.description}">Very good, very nice</td>
                 <td th:text="${product.price}">10000.00</td>
-                <td></td>
+                <td>
+                    <a th:href="@{/products/{id}(id=${product.id})}" th:text="'Edit'">Edit</a>
+                </td>
             </tr>
         </tbody>
     </table>

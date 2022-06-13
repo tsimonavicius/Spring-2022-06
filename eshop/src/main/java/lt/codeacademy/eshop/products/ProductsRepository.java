@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class ProductsRepository {
@@ -16,5 +17,13 @@ public class ProductsRepository {
 
     public void save(Product product) {
         productsList.add(product);
+    }
+
+    public Product getById(UUID id) {
+
+        return productsList.stream()
+                .filter(product -> product.getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 }

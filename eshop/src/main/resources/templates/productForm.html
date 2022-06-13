@@ -6,20 +6,20 @@
     <title>Create Product</title>
 </head>
 <body>
-    <form method="POST">
+    <form method="POST" th:object="${product}">
         <div>
             <label th:text="'Name'"></label>
-            <input name="name">
+            <input th:field="*{name}">
         </div>
 
         <div>
             <label th:text="'Price'"></label>
-            <input name="price">
+            <input th:field="*{price}">
         </div>
 
         <div>
             <label th:text="'Description'"></label>
-            <textarea name="description"></textarea>
+            <textarea th:field="*{description}"></textarea>
         </div>
 
         <div>
