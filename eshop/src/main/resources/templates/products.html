@@ -6,6 +6,7 @@
     <title>Products List</title>
 </head>
 <body>
+    <h1 th:if="${message ne null}" th:text="${message}"></h1>
     <div th:if="${products.empty}">
         <h1>No Products Found!</h1>
     </div>

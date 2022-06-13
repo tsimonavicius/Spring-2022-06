@@ -39,7 +39,9 @@ public class ProductsController {
 
         productsService.createProduct(product);
 
+        model.addAttribute("message", String.format("Product '%s' successfully created!", product.getName()));
         model.addAttribute("products", productsService.getProducts());
+
         return "products";
     }
 
@@ -56,13 +58,17 @@ public class ProductsController {
 
         productsService.updateProduct(product);
 
+        model.addAttribute("message", String.format("Product '%s' successfully updated!", product.getName()));
+
         return getProducts(model);
     }
 
     @PostMapping("/{id}/delete")
     public String deleteProduct(@PathVariable UUID id, Model model) {
 
-        productsService.deleteProduct(id);
+        Product product = productsService.deleteProduct(id);
+
+        model.addAttribute("message", String.format("Product '%s' successfully deleted!", product.getName()));
 
         return getProducts(model);
     }

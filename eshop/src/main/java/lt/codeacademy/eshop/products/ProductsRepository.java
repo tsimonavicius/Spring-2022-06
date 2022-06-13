@@ -36,12 +36,14 @@ public class ProductsRepository {
         }
     }
 
-    public void delete(UUID id) {
+    public Product delete(UUID id) {
 
         Integer index = getIndex(id);
         if (index != null) {
-            productsList.remove(index.intValue());
+            return productsList.remove(index.intValue());
         }
+
+        return null;
     }
 
     private Integer getIndex(UUID id) {
