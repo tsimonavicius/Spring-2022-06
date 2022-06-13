@@ -33,4 +33,9 @@ public class ProductsService {
 
         productsRepository.update(product);
     }
+
+    public void deleteProduct(UUID id) {
+
+        productsRepository.delete(id);
+    }
 }

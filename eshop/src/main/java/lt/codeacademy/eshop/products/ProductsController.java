@@ -58,4 +58,12 @@ public class ProductsController {
 
         return getProducts(model);
     }
+
+    @PostMapping("/{id}/delete")
+    public String deleteProduct(@PathVariable UUID id, Model model) {
+
+        productsService.deleteProduct(id);
+
+        return getProducts(model);
+    }
 }

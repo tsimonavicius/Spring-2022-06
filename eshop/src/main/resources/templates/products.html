@@ -25,6 +25,9 @@
                 <td th:text="${product.price}">10000.00</td>
                 <td>
                     <a th:href="@{/products/{id}(id=${product.id})}" th:text="'Edit'">Edit</a>
+                    <form th:action="@{/products/{id}/delete(id=${product.id})}" method="POST">
+                        <button th:text="'Delete'"></button>
+                    </form>
                 </td>
             </tr>
         </tbody>

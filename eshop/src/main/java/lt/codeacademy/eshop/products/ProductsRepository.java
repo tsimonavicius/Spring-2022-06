@@ -29,15 +29,29 @@ public class ProductsRepository {
 
     public void update(Product product) {
 
-        Integer index = null;
-        for (int i = 0; i < productsList.size(); i++) {
-            if (productsList.get(i).getId().equals(product.getId())) {
-                index = i;
-            }
-        }
+        Integer index = getIndex(product.getId());
 
         if (index != null) {
             productsList.set(index, product);
         }
+    }
+
+    public void delete(UUID id) {
+
+        Integer index = getIndex(id);
+        if (index != null) {
+            productsList.remove(index.intValue());
+        }
+    }
+
+    private Integer getIndex(UUID id) {
+
+        for (int i = 0; i < productsList.size(); i++) {
+            if (productsList.get(i).getId().equals(id)) {
+                return i;
+            }
+        }
+
+        return null;
     }
 }
