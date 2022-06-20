@@ -13,6 +13,12 @@
     <div th:if="${products.empty}">
         <h1>No Products Found!</h1>
     </div>
+    <div>
+        <form method="GET" th:action="@{/products/search}" class="form-inline">
+            <input name="name" th:value="${param.name}">
+            <button th:text="Search">Search</button>
+        </form>
+    </div>
     <table th:if="${not products.empty}" class="table table-striped">
         <thead>
             <tr>

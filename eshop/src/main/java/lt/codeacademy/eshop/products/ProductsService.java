@@ -43,4 +43,9 @@ public class ProductsService {
 
         return productToRemove;
     }
+
+    public List<Product> search(String name) {
+
+        return productsRepository.findByNameContainingIgnoreCase(name);
+    }
 }
