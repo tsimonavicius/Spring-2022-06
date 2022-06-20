@@ -49,7 +49,8 @@
             </a>
         </li>
 
-        <li th:each="page : ${#numbers.sequence(1, products.totalPages)}" class="page-item">
+        <li th:each="page : ${#numbers.sequence(1, products.totalPages)}" class="page-item"
+            th:classappend="${products.number == page - 1 ? 'active' : ''}">
             <a th:href="@{''(page=${page - 1})}" th:text="${page}" class="page-link">1</a>
         </li>
 
