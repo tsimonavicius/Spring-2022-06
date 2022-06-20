@@ -2,11 +2,11 @@ package lt.codeacademy.eshop.products;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -17,9 +17,9 @@ public class ProductsController {
     private final ProductsService productsService;
 
     @GetMapping
-    public String getProducts(@RequestParam(required = false) Integer page, Model model) {
+    public String getProducts(Pageable pageable, Model model) {
 
-        Page<Product> products = productsService.getProducts(page);
+        Page<Product> products = productsService.getProducts(pageable);
         model.addAttribute("products", products);
 
         return "products";
@@ -58,7 +58,7 @@ public class ProductsController {
 
         model.addAttribute("message", String.format("Product '%s' successfully updated!", product.getName()));
 
-        return getProducts(0, model);
+        return getProducts(null, model);
     }
 
     @PostMapping("/{id}/delete")
@@ -68,7 +68,7 @@ public class ProductsController {
 
         model.addAttribute("message", String.format("Product '%s' successfully deleted!", product.getName()));
 
-        return getProducts(0, model);
+        return getProducts(null, model);
     }
 
     @GetMapping("/search")

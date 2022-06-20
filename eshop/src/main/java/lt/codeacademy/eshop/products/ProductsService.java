@@ -3,7 +3,7 @@ package lt.codeacademy.eshop.products;
 import lombok.AllArgsConstructor;
 import lt.codeacademy.eshop.products.repos.JpaProductsRepository;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +15,8 @@ public class ProductsService {
 
     private final JpaProductsRepository productsRepository;
 
-    public Page<Product> getProducts(Integer page) {
-        return productsRepository.findAll(PageRequest.of(page, 5));
+    public Page<Product> getProducts(Pageable pageable) {
+        return productsRepository.findAll(pageable);
     }
 
     public void createProduct(Product product) {
