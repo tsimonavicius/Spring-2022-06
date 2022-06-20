@@ -49,14 +49,8 @@
             </a>
         </li>
 
-        <li class="page-item">
-            <a class="page-link" th:href="@{''(page=1)}">1</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">3</a>
+        <li th:each="page : ${#numbers.sequence(1, products.totalPages)}" class="page-item">
+            <a th:href="@{''(page=${page - 1})}" th:text="${page}" class="page-link">1</a>
         </li>
 
         <li class="page-item">

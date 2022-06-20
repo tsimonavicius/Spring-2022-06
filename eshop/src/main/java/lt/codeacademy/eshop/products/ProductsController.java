@@ -1,6 +1,7 @@
 package lt.codeacademy.eshop.products;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,9 @@ public class ProductsController {
     private final ProductsService productsService;
 
     @GetMapping
-    public String getProducts(Model model) {
+    public String getProducts(@RequestParam(required = false) Integer page, Model model) {
 
-        List<Product> products = productsService.getProducts();
+        Page<Product> products = productsService.getProducts(page);
         model.addAttribute("products", products);
 
         return "products";
@@ -37,7 +38,7 @@ public class ProductsController {
         productsService.createProduct(product);
 
         model.addAttribute("message", String.format("Product '%s' successfully created!", product.getName()));
-        model.addAttribute("products", productsService.getProducts());
+        model.addAttribute("products", productsService.getProducts(null));
 
         return "products";
     }
@@ -57,7 +58,7 @@ public class ProductsController {
 
         model.addAttribute("message", String.format("Product '%s' successfully updated!", product.getName()));
 
-        return getProducts(model);
+        return getProducts(0, model);
     }
 
     @PostMapping("/{id}/delete")
@@ -67,7 +68,7 @@ public class ProductsController {
 
         model.addAttribute("message", String.format("Product '%s' successfully deleted!", product.getName()));
 
-        return getProducts(model);
+        return getProducts(0, model);
     }
 
     @GetMapping("/search")

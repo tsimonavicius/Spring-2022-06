@@ -2,6 +2,8 @@ package lt.codeacademy.eshop.products;
 
 import lombok.AllArgsConstructor;
 import lt.codeacademy.eshop.products.repos.JpaProductsRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +15,8 @@ public class ProductsService {
 
     private final JpaProductsRepository productsRepository;
 
-    public List<Product> getProducts() {
-        return productsRepository.findAll();
+    public Page<Product> getProducts(Integer page) {
+        return productsRepository.findAll(PageRequest.of(page, 5));
     }
 
     public void createProduct(Product product) {
