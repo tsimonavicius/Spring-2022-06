@@ -20,16 +20,17 @@
             <button th:text="Search">Search</button>
         </form>
     </div>
-    <div th:text="${products.sort.getOrderFor('name')?.direction}"></div>
     <table th:if="${not products.empty}" class="table table-striped">
         <thead>
             <tr>
                 <th>
                     <span>Name</span>
-                    <a th:href="@{''(sort='name,ASC,ignoreCase')}">
+                    <a th:href="@{''(sort='name,ASC,ignoreCase')}"
+                        th:if="${products.sort.getOrderFor('name')?.direction.name() eq 'DESC'}">
                         <i class="fa-solid fa-arrow-down-a-z"></i>
                     </a>
-                    <a th:href="@{''(sort='name,DESC,ignoreCase')}">
+                    <a th:href="@{''(sort='name,DESC,ignoreCase')}"
+                       th:if="${products.sort.getOrderFor('name')?.direction.name() eq 'ASC'}">
                         <i class="fa-solid fa-arrow-up-z-a"></i>
                     </a>
                 </th>
