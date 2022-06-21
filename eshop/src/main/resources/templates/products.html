@@ -59,22 +59,26 @@
             </tr>
         </tbody>
     </table>
-    <ul class="pagination">
+    <ul class="pagination"
+        th:with="order=${products.sort.sorted ? products.sort.iterator().next() : null},
+                 ignoreCase=${order ne null and order.ignoreCase ? 'ignoreCase' : ''},
+                 orderParam=${order ne null ? order.property + ',' + order.direction.name() + ',' + ignoreCase : null}">
         <li class="page-item"
             th:classappend="${products.hasPrevious() ? '' : 'disabled'}">
-            <a class="page-link" th:href="@{''(page=${products.number - 1})}" aria-label="Previous">
+            <a class="page-link" th:href="@{''(page=${products.number - 1}, sort=${orderParam})}" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
 
         <li th:each="page : ${#numbers.sequence(1, products.totalPages)}" class="page-item"
             th:classappend="${products.number == page - 1 ? 'active' : ''}">
-            <a th:href="@{''(page=${page - 1})}" th:text="${page}" class="page-link">1</a>
+            <a th:href="@{''(page=${page - 1}, sort=${orderParam})}"
+               th:text="${page}" class="page-link">1</a>
         </li>
 
         <li class="page-item"
             th:classappend="${products.hasNext() ? '' : 'disabled'}">
-            <a class="page-link" th:href="@{''(page=${products.number + 1})}" aria-label="Next">
+            <a class="page-link" th:href="@{''(page=${products.number + 1}, sort=${orderParam})}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
