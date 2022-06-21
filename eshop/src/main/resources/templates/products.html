@@ -20,6 +20,7 @@
             <button th:text="Search">Search</button>
         </form>
     </div>
+    <div th:text="${products.sort.getOrderFor('name')?.direction}"></div>
     <table th:if="${not products.empty}" class="table table-striped">
         <thead>
             <tr>
