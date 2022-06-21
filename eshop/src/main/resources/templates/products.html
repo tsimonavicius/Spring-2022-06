@@ -25,33 +25,21 @@
             <tr>
                 <th>
                     <span>Name</span>
-                    <a th:href="@{''(sort='name,ASC,ignoreCase')}"
-                        th:if="${products.sort.getOrderFor('name')?.direction?.descending}">
-                        <i class="fa-solid fa-arrow-down-a-z"></i>
-                    </a>
-                    <a th:href="@{''(sort='name,DESC,ignoreCase')}"
-                       th:if="${products.sort.getOrderFor('name')?.direction?.ascending}">
-                        <i class="fa-solid fa-arrow-up-z-a"></i>
-                    </a>
-                    <a th:href="@{''(sort='name,ASC,ignoreCase')}"
-                       th:if="${products.sort.getOrderFor('name') eq null}">
-                        <i class="fa-solid fa-arrow-down-a-z"></i>
+                    <a th:with="ascending=${products.sort.getOrderFor('name')?.direction?.name() eq 'ASC'}"
+                        th:href="@{''(sort='name,' + ${ascending ? 'DESC' : 'ASC'} + ',ignoreCase')}">
+                        <i class="fa-solid"
+                            th:classappend="${ascending ? 'fa-arrow-up-z-a' : 'fa-arrow-down-a-z'}"
+                        ></i>
                     </a>
                 </th>
                 <th>Description</th>
                 <th>
                     <span>Price</span>
-                    <a th:href="@{''(sort='price,ASC')}"
-                       th:if="${products.sort.getOrderFor('price')?.direction?.descending}">
-                        <i class="fa-solid fa-arrow-down-1-9"></i>
-                    </a>
-                    <a th:href="@{''(sort='price,DESC')}"
-                       th:if="${products.sort.getOrderFor('price')?.direction?.ascending}">
-                        <i class="fa-solid fa-arrow-up-9-1"></i>
-                    </a>
-                    <a th:href="@{''(sort='price,DESC')}"
-                       th:if="${products.sort.getOrderFor('price') eq null}">
-                        <i class="fa-solid fa-arrow-up-9-1"></i>
+                    <a th:with="ascending=${products.sort.getOrderFor('price')?.direction?.name() eq 'ASC'}"
+                       th:href="@{''(sort='price,' + ${ascending ? 'DESC' : 'ASC'})}">
+                        <i class="fa-solid"
+                           th:classappend="${ascending ? 'fa-arrow-up-9-1' : 'fa-arrow-down-1-9'}"
+                        ></i>
                     </a>
                 </th>
                 <th></th>
