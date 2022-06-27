@@ -7,6 +7,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.UUID;
 
@@ -34,11 +35,12 @@ public class ProductsController {
     }
 
     @PostMapping("/create")
-    public String createProduct(Product product, Model model) {
+    public String createProduct(Product product, RedirectAttributes redirectAttributes) {
 
         productsService.createProduct(product);
 
-        model.addAttribute("message", String.format("Product '%s' successfully created!", product.getName()));
+        redirectAttributes.addAttribute("message",
+                String.format("Product '%s' successfully created!", product.getName()));
 
         return "redirect:/products";
     }

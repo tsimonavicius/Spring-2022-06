@@ -8,8 +8,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
 </head>
 <body class="container">
-    <div th:if="${message ne null}" class="alert alert-success" role="alert">
-        <span th:text="${message}"></span>
+    <div th:if="${param.message ne null}" class="alert alert-success" role="alert">
+        <span th:text="${param.message}"></span>
     </div>
     <div th:if="${products.empty}">
         <h1>No Products Found!</h1>
