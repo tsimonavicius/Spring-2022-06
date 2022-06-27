@@ -39,7 +39,7 @@ public class ProductsController {
 
         productsService.createProduct(product);
 
-        redirectAttributes.addAttribute("message",
+        redirectAttributes.addFlashAttribute("message",
                 String.format("Product '%s' successfully created!", product.getName()));
 
         return "redirect:/products";
