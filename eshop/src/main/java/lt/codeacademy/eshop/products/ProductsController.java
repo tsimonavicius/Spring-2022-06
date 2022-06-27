@@ -39,9 +39,8 @@ public class ProductsController {
         productsService.createProduct(product);
 
         model.addAttribute("message", String.format("Product '%s' successfully created!", product.getName()));
-        model.addAttribute("products", productsService.getProducts(null));
 
-        return "products";
+        return "redirect:/products";
     }
 
     @GetMapping("/{id}")
