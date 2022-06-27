@@ -64,13 +64,13 @@ public class ProductsController {
     }
 
     @PostMapping("/{id}/delete")
-    public String deleteProduct(@PathVariable UUID id, Model model) {
+    public String deleteProduct(@PathVariable UUID id, RedirectAttributes redirectAttributes) {
 
         Product product = productsService.deleteProduct(id);
 
-        model.addAttribute("message", String.format("Product '%s' successfully deleted!", product.getName()));
+        redirectAttributes.addAttribute("message", String.format("Product '%s' successfully deleted!", product.getName()));
 
-        return getProducts(null, model);
+        return "redirect:/products";
     }
 
     @GetMapping("/search")
