@@ -1,6 +1,7 @@
 package lt.codeacademy.eshop.products;
 
 import lombok.AllArgsConstructor;
+import lt.codeacademy.eshop.products.errors.ProductNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -80,5 +81,14 @@ public class ProductsController {
                 productsService.search(name));
 
         return "products";
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public String productNotFound(ProductNotFoundException e, Model model) {
+
+        model.addAttribute("messageCode", e.getMessage());
+        model.addAttribute("productId", e.getProductId());
+
+        return "error/productNotFoundPage";
     }
 }
