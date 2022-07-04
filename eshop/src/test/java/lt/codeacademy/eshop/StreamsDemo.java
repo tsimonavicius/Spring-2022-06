@@ -49,7 +49,7 @@ public class StreamsDemo {
     private void functionalProgrammingApproach(List<Phone> phones, String brand) {
 
         String model = phones.stream()
-                .filter(phone -> brand.equalsIgnoreCase(phone.getBrand()))
+                .filter(phone -> filterByPhoneBrand(brand, phone))
                 .sorted(Comparator.comparing(Phone::getPrice))
                 .findFirst()
                 .map(Phone::getModel)
@@ -60,6 +60,14 @@ public class StreamsDemo {
         } else {
             System.out.println(brand + " nera!");
         }
+    }
+
+    private boolean filterByPhoneBrand(String brand, Phone phone) {
+        //
+        // LOTS OF LOGIC
+        //
+        //
+        return brand.equalsIgnoreCase(phone.getBrand());
     }
 
 }
