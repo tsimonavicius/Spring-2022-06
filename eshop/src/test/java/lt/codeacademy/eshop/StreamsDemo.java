@@ -52,7 +52,13 @@ public class StreamsDemo {
     private void functionalProgrammingApproach(List<Phone> phones, String brand) {
 
         String model = phones.stream()
-                .filter(new FilterByPhoneBrand(brand))
+                .filter(new Predicate<Phone>() {
+
+                    @Override
+                    public boolean test(Phone phone) {
+                        return brand.equalsIgnoreCase(phone.getBrand());
+                    }
+                })
                 .sorted(new PriceComparator())
                 .findFirst()
                 .map(new MapModelFromPhone())
@@ -83,16 +89,16 @@ class PriceComparator implements Comparator<Phone> {
     }
 }
 
-@Data
-class FilterByPhoneBrand implements Predicate<Phone> {
-
-    private final String brand;
-
-    @Override
-    public boolean test(Phone phone) {
-        return brand.equalsIgnoreCase(phone.getBrand());
-    }
-}
+//@Data
+//class FilterByPhoneBrand implements Predicate<Phone> {
+//
+//    private final String brand;
+//
+//    @Override
+//    public boolean test(Phone phone) {
+//        return brand.equalsIgnoreCase(phone.getBrand());
+//    }
+//}
 
 @Data
 class Phone {
