@@ -5,11 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 public class StreamsDemo {
 
@@ -53,9 +49,9 @@ public class StreamsDemo {
 
         String model = phones.stream()
                 .filter(phone -> brand.equalsIgnoreCase(phone.getBrand()))
-                .sorted(new PriceComparator())
+                .sorted((o1, o2) -> o1.getPrice().compareTo(o2.getPrice()))
                 .findFirst()
-                .map(new MapModelFromPhone())
+                .map(phone -> phone.getModel())
                 .orElse(null);
 
         if (model != null) {
@@ -65,22 +61,6 @@ public class StreamsDemo {
         }
     }
 
-}
-
-class MapModelFromPhone implements Function<Phone, String> {
-
-    @Override
-    public String apply(Phone phone) {
-        return phone.getModel();
-    }
-}
-
-class PriceComparator implements Comparator<Phone> {
-
-    @Override
-    public int compare(Phone o1, Phone o2) {
-        return o1.getPrice().compareTo(o2.getPrice());
-    }
 }
 
 @Data
