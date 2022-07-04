@@ -6,4 +6,11 @@ services:
       POSTGRES_USER: eshop
       POSTGRES_PASSWORD: eshoppass
     ports:
-      - '5432:5432'
+      - "5432:5432"
+  dbclient:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: tadas@email.com
+      PGADMIN_DEFAULT_PASSWORD: p
+    ports:
+      - "8889:80"
