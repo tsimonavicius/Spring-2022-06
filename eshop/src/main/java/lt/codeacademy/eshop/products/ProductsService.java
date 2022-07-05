@@ -2,20 +2,19 @@ package lt.codeacademy.eshop.products;
 
 import lombok.AllArgsConstructor;
 import lt.codeacademy.eshop.products.errors.ProductNotFoundException;
-import lt.codeacademy.eshop.products.repos.JpaProductsRepository;
+import lt.codeacademy.eshop.products.repos.ProductsRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.function.Supplier;
 
 @AllArgsConstructor
 @Service
 public class ProductsService {
 
-    private final JpaProductsRepository productsRepository;
+    private final ProductsRepository productsRepository;
 
     public Page<Product> getProducts(Pageable pageable) {
         return productsRepository.findAll(pageable);
@@ -32,14 +31,6 @@ public class ProductsService {
     public Product getProduct(UUID id) {
 
         return productsRepository.findById(id)
-//                .orElseThrow(new MyExceptionSupplier());
-//                .orElseThrow(new Supplier<ProductNotFoundException>() {
-//
-//                    @Override
-//                    public ProductNotFoundException get() {
-//                        return new ProductNotFoundException("", null);
-//                    }
-//                })
                 .orElseThrow(() -> new ProductNotFoundException("", null));
     }
 
@@ -61,11 +52,4 @@ public class ProductsService {
         return productsRepository.findByNameContainingIgnoreCase(name);
     }
 
-    private static class MyExceptionSupplier implements Supplier<ProductNotFoundException> {
-
-        @Override
-        public ProductNotFoundException get() {
-            return new ProductNotFoundException("", null);
-        }
-    }
 }

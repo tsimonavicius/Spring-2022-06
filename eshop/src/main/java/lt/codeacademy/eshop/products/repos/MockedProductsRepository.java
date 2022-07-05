@@ -1,60 +1,85 @@
 package lt.codeacademy.eshop.products.repos;
 
 import lt.codeacademy.eshop.products.Product;
+import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Repository
-public class MockedProductsRepository {
+@Profile("mocked-db")
+public class MockedProductsRepository implements ProductsRepository {
 
     private final List<Product> productsList = new ArrayList<>();
 
-    public List<Product> getAll() {
-        return productsList;
+    @Override
+    public Page<Product> findAll(Pageable pageable) {
+
+        return new PageImpl<>(productsList, pageable, productsList.size());
     }
 
-    public void save(Product product) {
-        productsList.add(product);
+    public Product save(Product product) {
+
+        Optional<Product> productOptional = findById(product.getId());
+
+        if (productOptional.isPresent()) {
+            update(product);
+        } else {
+            createNewProduct(product);
+        }
+
+        return product;
     }
 
-    public Product getById(UUID id) {
+    @Override
+    public Optional<Product> findById(UUID id) {
 
         return productsList.stream()
                 .filter(product -> product.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
-    public void update(Product product) {
-
-        Integer index = getIndex(product.getId());
-
-        if (index != null) {
-            productsList.set(index, product);
-        }
+    @Override
+    public void delete(Product productToRemove) {
+        getIndex(productToRemove.getId())
+                .ifPresent(index -> productsList.remove(index.intValue()));
     }
 
-    public Product delete(UUID id) {
+    @Override
+    public List<Product> findByNameContainingIgnoreCase(String name) {
 
-        Integer index = getIndex(id);
-        if (index != null) {
-            return productsList.remove(index.intValue());
-        }
-
-        return null;
+        return productsList.stream()
+                .filter(p -> p.getName().equalsIgnoreCase(name))
+                .collect(toList());
     }
 
-    private Integer getIndex(UUID id) {
+    private void createNewProduct(Product product) {
+        productsList.add(product);
+    }
+
+    private void update(Product product) {
+
+        getIndex(product.getId())
+                .ifPresent(index -> productsList.set(index, product));
+    }
+
+    private Optional<Integer> getIndex(UUID id) {
 
         for (int i = 0; i < productsList.size(); i++) {
             if (productsList.get(i).getId().equals(id)) {
-                return i;
+                return Optional.of(i);
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 }
