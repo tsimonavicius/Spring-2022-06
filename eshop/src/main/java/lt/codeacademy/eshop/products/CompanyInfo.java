@@ -13,5 +13,14 @@ public class CompanyInfo {
 
     private String name;
     private String address = "Default address";
+
+    private CompanyBankInfo bankInfo;
+}
+
+@Getter
+@Setter
+class CompanyBankInfo {
+
+    private String bank;
     private String iban = "LT123456789";
 }
