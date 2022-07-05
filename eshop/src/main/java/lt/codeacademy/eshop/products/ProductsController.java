@@ -1,5 +1,6 @@
 package lt.codeacademy.eshop.products;
 
+import lombok.AllArgsConstructor;
 import lt.codeacademy.eshop.products.errors.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -12,31 +13,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.UUID;
 
+@AllArgsConstructor
 @Controller
 @RequestMapping("/products")
 public class ProductsController {
 
     private final ProductsService productsService;
+    private final CompanyInfo companyInfo;
 
-    private final String companyName;
-    private final String companyAddress;
-    private final String iban;
-
-    public ProductsController(ProductsService productsService,
-                              @Value("${company.name}") String companyName,
-                              @Value("${company.address}") String companyAddress,
-                              @Value("${company.iban: LT123456789}") String iban) {
-        this.productsService = productsService;
-        this.companyName = companyName;
-        this.companyAddress = companyAddress;
-        this.iban = iban;
-    }
-
-    @ModelAttribute
-    public void addCompanyDataToModel(Model model) {
-        model.addAttribute("companyName", companyName);
-        model.addAttribute("companyAddress", companyAddress);
-        model.addAttribute("companyIban", iban);
+    @ModelAttribute("companyInfo")
+    public CompanyInfo addCompanyDataToModel() {
+        return companyInfo;
     }
 
     @GetMapping
