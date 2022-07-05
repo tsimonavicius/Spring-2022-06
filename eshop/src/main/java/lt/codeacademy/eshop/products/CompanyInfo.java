@@ -2,20 +2,16 @@ package lt.codeacademy.eshop.products;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
 @Getter
 @Setter
+@ConfigurationProperties(prefix = "company")
 public class CompanyInfo {
 
-    @Value("${name}")
     private String name;
-
-    @Value("${address}")
-    private String address;
-
-    @Value("${iban: LT123456789}")
-    private String iban;
+    private String address = "Default address";
+    private String iban = "LT123456789";
 }
