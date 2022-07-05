@@ -5,6 +5,9 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 @Component
 @Getter
 @Setter
@@ -15,6 +18,8 @@ public class CompanyInfo {
     private String address = "Default address";
 
     private CompanyBankInfo bankInfo;
+
+    private List<BigDecimal> list;
 }
 
 @Getter
