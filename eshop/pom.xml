@@ -67,4 +67,21 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>maven-a</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active>a</spring.profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>maven-b</id>
+			<properties>
+				<spring.profiles.active>b</spring.profiles.active>
+			</properties>
+		</profile>
+	</profiles>
 </project>
