@@ -26,7 +26,7 @@ public class Product {
     @Type(type = "uuid-char")
     private UUID id;
 
-    @NotBlank(message = "'Name' privalo būti užpildytas")
+    @NotBlank
     @Size(min=3, max=50)
     private String name;
 
