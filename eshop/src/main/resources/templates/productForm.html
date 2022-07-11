@@ -15,6 +15,13 @@
             </ul>
         </div>
 
+        <div th:if="${#fields.hasErrors()}">
+            <ul>
+                <li th:each="error : ${#fields.detailedErrors()}"
+                    th:text="${error.fieldName + ': ' + error.message}">Error message</li>
+            </ul>
+        </div>
+
         <div>
             <label th:text="'Name'"></label>
             <input th:field="*{name}">
