@@ -25,16 +25,19 @@
         <div>
             <label th:text="'Name'"></label>
             <input th:field="*{name}">
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name field errors</p>
         </div>
 
         <div>
             <label th:text="'Price'"></label>
             <input th:field="*{price}">
+            <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price field errors</p>
         </div>
 
         <div>
             <label th:text="'Description'"></label>
             <textarea th:field="*{description}"></textarea>
+            <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description field errors</p>
         </div>
 
         <div>
