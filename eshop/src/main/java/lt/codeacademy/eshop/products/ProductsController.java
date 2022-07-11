@@ -2,6 +2,7 @@ package lt.codeacademy.eshop.products;
 
 import lombok.AllArgsConstructor;
 import lt.codeacademy.eshop.products.errors.ProductNotFoundException;
+import lt.codeacademy.eshop.products.validations.CustomProductValidator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -21,6 +22,7 @@ public class ProductsController {
 
     private final ProductsService productsService;
     private final CompanyInfo companyInfo;
+    private final CustomProductValidator productValidator;
 
     @ModelAttribute("companyInfo")
     public CompanyInfo addCompanyDataToModel() {
@@ -45,6 +47,8 @@ public class ProductsController {
 
     @PostMapping("/create")
     public String createProduct(@Valid Product product, BindingResult errors, RedirectAttributes redirectAttributes) {
+
+        productValidator.validate(product, errors);
 
         if (errors.hasErrors()) {
             return "productForm";

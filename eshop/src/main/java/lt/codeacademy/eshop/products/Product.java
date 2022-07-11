@@ -38,6 +38,6 @@ public class Product {
     @Positive
     private BigDecimal price;
 
-    @PhoneNumber(phoneNumberType = PhoneNumber.PhoneNumberType.PART)
+//    @PhoneNumber(phoneNumberType = PhoneNumber.PhoneNumberType.PART)
     private String phoneNumber;
 }
