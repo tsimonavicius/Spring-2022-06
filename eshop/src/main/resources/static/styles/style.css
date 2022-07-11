@@ -3,3 +3,8 @@
     display: inline-block;
     padding-right: 20px;
 }
+
+.error {
+    color: indianred;
+    border-color: red;
+}
