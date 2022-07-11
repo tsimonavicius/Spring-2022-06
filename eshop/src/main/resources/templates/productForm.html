@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Product</title>
+    <link rel="stylesheet" th:href="@{/styles/style.css}"/>
 </head>
 <body>
     <form method="POST" th:object="${product}">
 
-        <div th:if="${#fields.hasErrors()}">
+        <div th:if="${#fields.hasErrors()}" class="error-block">
             <ul>
                 <li th:each="error : ${#fields.errors()}"
                     th:text="${error}">Error message</li>
