@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lt.codeacademy.eshop.products.validations.PhoneNumber;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
@@ -36,4 +37,7 @@ public class Product {
     @NotNull
     @Positive
     private BigDecimal price;
+
+    @PhoneNumber(phoneNumberType = PhoneNumber.PhoneNumberType.PART)
+    private String phoneNumber;
 }

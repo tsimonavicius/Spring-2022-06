@@ -36,6 +36,12 @@
         </div>
 
         <div>
+            <label th:text="'Phone number'"></label>
+            <input th:field="*{phoneNumber}" th:errorclass="error">
+            <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">PhoneNumber field errors</p>
+        </div>
+
+        <div>
             <label th:text="'Description'"></label>
             <textarea th:field="*{description}" th:errorclass="error"></textarea>
             <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description field errors</p>
