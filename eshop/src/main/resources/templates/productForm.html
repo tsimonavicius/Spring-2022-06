@@ -7,6 +7,14 @@
 </head>
 <body>
     <form method="POST" th:object="${product}">
+
+        <div th:if="${#fields.hasErrors()}">
+            <ul>
+                <li th:each="error : ${#fields.errors()}"
+                    th:text="${error}">Error message</li>
+            </ul>
+        </div>
+
         <div>
             <label th:text="'Name'"></label>
             <input th:field="*{name}">
