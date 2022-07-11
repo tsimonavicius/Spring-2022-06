@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,6 +24,11 @@ public class ProductsController {
     private final ProductsService productsService;
     private final CompanyInfo companyInfo;
     private final CustomProductValidator productValidator;
+
+    @InitBinder(value = "product")
+    void initStudentValidator(WebDataBinder binder) {
+        binder.addValidators(productValidator);
+    }
 
     @ModelAttribute("companyInfo")
     public CompanyInfo addCompanyDataToModel() {
@@ -47,8 +53,6 @@ public class ProductsController {
 
     @PostMapping("/create")
     public String createProduct(@Valid Product product, BindingResult errors, RedirectAttributes redirectAttributes) {
-
-        productValidator.validate(product, errors);
 
         if (errors.hasErrors()) {
             return "productForm";
