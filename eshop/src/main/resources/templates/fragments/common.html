@@ -3,12 +3,13 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <footer th:fragment="footer"
-        class="page-footer font-small blue">
-    <div th:text="${companyInfo.name}"></div>
-    <div th:text="${companyInfo.address}"></div>
-    <div th:text="${companyInfo.bankInfo.bank}"></div>
-    <div th:text="${companyInfo.bankInfo.iban}"></div>
-    <div th:text="${companyInfo.list}"></div>
+        class="footer mt-auto py-3 bg-light text-center">
+    <div class="container text-muted">
+        <div th:text="${companyInfo.name}"></div>
+        <div th:text="${companyInfo.address}"></div>
+        <div th:text="${companyInfo.bankInfo.bank}"></div>
+        <div th:text="${companyInfo.bankInfo.iban}"></div>
+    </div>
 </footer>
 
 <div th:fragment="successMessage(message)"
