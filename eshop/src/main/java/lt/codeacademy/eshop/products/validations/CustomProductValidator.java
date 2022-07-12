@@ -20,6 +20,10 @@ public class CustomProductValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNumber", "phoneNumber.required");
 
+        if (product.getPhoneNumber() == null) {
+            return;
+        }
+
         if (!product.getPhoneNumber().startsWith("+3706") &&
                 !product.getPhoneNumber().startsWith("86")) {
             errors.rejectValue("phoneNumber", "phoneNumber.invalid",

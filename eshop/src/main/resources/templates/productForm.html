@@ -5,47 +5,32 @@
 
 <div id="main">
     <form method="POST" th:object="${product}">
-
-        <div th:if="${#fields.hasErrors()}" class="error-block">
-            <ul>
-                <li th:each="error : ${#fields.errors()}"
-                    th:text="${error}">Error message</li>
-            </ul>
+        <div class="mb-3">
+            <label th:text="'Name'" for="name"></label>
+            <input id="name" th:field="*{name}" class="form-control" th:errorclass="error">
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="form-text">Name field errors</div>
         </div>
 
-        <div th:if="${#fields.hasErrors()}">
-            <ul>
-                <li th:each="error : ${#fields.detailedErrors()}"
-                    th:text="${error.fieldName + ': ' + error.message}">Error message</li>
-            </ul>
+        <div class="mb-3">
+            <label th:text="'Price'" for="price"></label>
+            <input id="price" th:field="*{price}" th:errorclass="error" class="form-control">
+            <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="form-text">Price field errors</div>
         </div>
 
-        <div>
-            <label th:text="'Name'"></label>
-            <input th:field="*{name}" th:errorclass="error">
-            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name field errors</p>
+        <div class="mb-3">
+            <label th:text="'Phone number'" for="phoneNumber"></label>
+            <input id="phoneNumber" th:field="*{phoneNumber}" th:errorclass="error" class="form-control">
+            <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="form-text">PhoneNumber field errors</div>
         </div>
 
-        <div>
-            <label th:text="'Price'"></label>
-            <input th:field="*{price}" th:errorclass="error">
-            <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price field errors</p>
+        <div class="mb-3">
+            <label th:text="'Description'" for="description"></label>
+            <textarea id="description" th:field="*{description}" th:errorclass="error" class="form-control"></textarea>
+            <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="form-text">Description field errors</div>
         </div>
 
         <div>
-            <label th:text="'Phone number'"></label>
-            <input th:field="*{phoneNumber}" th:errorclass="error">
-            <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">PhoneNumber field errors</p>
-        </div>
-
-        <div>
-            <label th:text="'Description'"></label>
-            <textarea th:field="*{description}" th:errorclass="error"></textarea>
-            <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description field errors</p>
-        </div>
-
-        <div>
-            <button type="submit">Create</button>
+            <button type="submit" class="btn btn-primary">Create</button>
         </div>
     </form>
 </div>
