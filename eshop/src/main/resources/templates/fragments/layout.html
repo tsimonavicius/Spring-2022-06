@@ -14,7 +14,38 @@
 </head>
 
 <body>
-    <header>menu</header>
+    <header class="p-3 bg-dark text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a th:href="@{/}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <img th:src="@{/images/logo.png}" height="20" width="20"/>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li>
+                        <a th:href="@{/}" th:text="#{menu.home}"
+                           th:classappend="${#httpServletRequest.requestURI eq '/' ? 'text-white' : 'text-secondary'}"
+                           class="nav-link px-2">Home</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/products}" th:text="#{menu.products}"
+                           th:classappend="${#httpServletRequest.requestURI eq '/products' ? 'text-white' : 'text-secondary'}"
+                           class="nav-link px-2">Home</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/about}" th:text="#{menu.about}"
+                           th:classappend="${#httpServletRequest.requestURI eq '/about' ? 'text-white' : 'text-secondary'}"
+                           class="nav-link px-2">About</a>
+                    </li>
+                </ul>
+
+                <div class="text-end">
+                    <button type="button" class="btn btn-outline-light me-2">Login</button>
+                    <button type="button" class="btn btn-warning">Sign-up</button>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <main th:insert="${content}" class="container">
         PAGE CONTENT
