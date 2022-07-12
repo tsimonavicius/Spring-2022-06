@@ -11,10 +11,9 @@
     <div th:text="${companyInfo.list}"></div>
 </footer>
 
-<div th:fragment="successMessage"
-     th:with="message=${msg ne null ? msg : 'Default message'}"
-      class="alert alert-success" role="alert">
-    <span th:if="${message ne null}" th:text="${message}"></span>
+<div th:fragment="successMessage(message)"
+     th:if="${message ne null}" class="alert alert-success" role="alert">
+    <span th:text="${message}"></span>
 </div>
 
 </html>
