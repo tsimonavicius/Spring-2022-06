@@ -90,12 +90,8 @@
         <a th:href="@{/products/create}" th:text="'Create Product'">Create Product</a>
     </div>
 
-    <footer class="page-footer font-small blue">
-        <div th:text="${companyInfo.name}"></div>
-        <div th:text="${companyInfo.address}"></div>
-        <div th:text="${companyInfo.bankInfo.bank}"></div>
-        <div th:text="${companyInfo.bankInfo.iban}"></div>
-        <div th:text="${companyInfo.list}"></div>
+    <footer th:replace="fragments/common :: footer">
+        <div>OUR FOOTER</div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>

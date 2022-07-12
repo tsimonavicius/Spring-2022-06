@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<footer th:fragment="footer"
+        class="page-footer font-small blue">
+    <div th:text="${companyInfo.name}"></div>
+    <div th:text="${companyInfo.address}"></div>
+    <div th:text="${companyInfo.bankInfo.bank}"></div>
+    <div th:text="${companyInfo.bankInfo.iban}"></div>
+    <div th:text="${companyInfo.list}"></div>
+</footer>
+
+</html>
