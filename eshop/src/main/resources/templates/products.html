@@ -1,36 +1,32 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="#{title}">Products List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
-</head>
-<body class="container">
-    <div th:replace="fragments/common :: successMessage(${message})">
-    </div>
-    <div th:if="${param.message ne null}" class="alert alert-success" role="alert">
-        <span th:text="${param.message}"></span>
-    </div>
-    <div th:if="${products.empty}">
-        <h1>No Products Found!</h1>
-    </div>
-    <div>
-        <form method="GET" th:action="@{/products/search}" class="form-inline">
-            <input name="name" th:value="${param.name}">
-            <button th:text="Search">Search</button>
-        </form>
-    </div>
-    <table th:if="${not products.empty}" class="table table-striped">
-        <thead>
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="fragments/layout :: layout(#{productsPage.title}, ~{:: #main})">
+
+    <div id="main">
+        <div th:replace="fragments/common :: successMessage(${message})">
+        </div>
+        <div th:if="${param.message ne null}" class="alert alert-success" role="alert">
+            <span th:text="${param.message}"></span>
+        </div>
+        <div th:if="${products.empty}">
+            <h1>No Products Found!</h1>
+        </div>
+        <div>
+            <form method="GET" th:action="@{/products/search}" class="form-inline">
+                <input name="name" th:value="${param.name}">
+                <button th:text="Search">Search</button>
+            </form>
+        </div>
+        <table th:if="${not products.empty}" class="table table-striped">
+            <thead>
             <tr>
                 <th>
                     <span>Name</span>
                     <a th:with="ascending=${products.sort.getOrderFor('name')?.direction?.name() eq 'ASC'}"
-                        th:href="@{''(sort='name,' + ${ascending ? 'DESC' : 'ASC'} + ',ignoreCase')}">
+                       th:href="@{''(sort='name,' + ${ascending ? 'DESC' : 'ASC'} + ',ignoreCase')}">
                         <i class="fa-solid"
-                            th:classappend="${ascending ? 'fa-arrow-up-z-a' : 'fa-arrow-down-a-z'}"
+                           th:classappend="${ascending ? 'fa-arrow-up-z-a' : 'fa-arrow-down-a-z'}"
                         ></i>
                     </a>
                 </th>
@@ -46,8 +42,8 @@
                 </th>
                 <th></th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             <tr th:each="product : ${products}">
                 <td th:text="${product.name}">Samsung S23</td>
                 <td th:text="${product.description}">Very good, very nice</td>
@@ -59,39 +55,35 @@
                     </form>
                 </td>
             </tr>
-        </tbody>
-    </table>
-    <ul class="pagination"
-        th:with="order=${products.sort.sorted ? products.sort.iterator().next() : null},
+            </tbody>
+        </table>
+        <ul class="pagination"
+            th:with="order=${products.sort.sorted ? products.sort.iterator().next() : null},
                  ignoreCase=${order ne null and order.ignoreCase ? 'ignoreCase' : ''},
                  orderParam=${order ne null ? order.property + ',' + order.direction.name() + ',' + ignoreCase : null}">
-        <li class="page-item"
-            th:classappend="${products.hasPrevious() ? '' : 'disabled'}">
-            <a class="page-link" th:href="@{''(page=${products.number - 1}, sort=${orderParam})}" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
+            <li class="page-item"
+                th:classappend="${products.hasPrevious() ? '' : 'disabled'}">
+                <a class="page-link" th:href="@{''(page=${products.number - 1}, sort=${orderParam})}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
 
-        <li th:each="page : ${#numbers.sequence(1, products.totalPages)}" class="page-item"
-            th:classappend="${products.number == page - 1 ? 'active' : ''}">
-            <a th:href="@{''(page=${page - 1}, sort=${orderParam})}"
-               th:text="${page}" class="page-link">1</a>
-        </li>
+            <li th:each="page : ${#numbers.sequence(1, products.totalPages)}" class="page-item"
+                th:classappend="${products.number == page - 1 ? 'active' : ''}">
+                <a th:href="@{''(page=${page - 1}, sort=${orderParam})}"
+                   th:text="${page}" class="page-link">1</a>
+            </li>
 
-        <li class="page-item"
-            th:classappend="${products.hasNext() ? '' : 'disabled'}">
-            <a class="page-link" th:href="@{''(page=${products.number + 1}, sort=${orderParam})}" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-    <div>
-        <a th:href="@{/products/create}" th:text="'Create Product'">Create Product</a>
+            <li class="page-item"
+                th:classappend="${products.hasNext() ? '' : 'disabled'}">
+                <a class="page-link" th:href="@{''(page=${products.number + 1}, sort=${orderParam})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+        <div>
+            <a th:href="@{/products/create}" th:text="'Create Product'">Create Product</a>
+        </div>
     </div>
 
-    <footer th:replace="fragments/common :: footer">
-        <div>OUR FOOTER</div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-</body>
 </html>
