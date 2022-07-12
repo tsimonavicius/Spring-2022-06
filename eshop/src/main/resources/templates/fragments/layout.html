@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <header class="p-3 bg-dark text-white">
+    <header class="p-3 bg-dark text-white mb-2">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a th:href="@{/}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -29,7 +29,7 @@
                     </li>
                     <li>
                         <a th:href="@{/products}" th:text="#{menu.products}"
-                           th:classappend="${#httpServletRequest.requestURI eq '/products' ? 'text-white' : 'text-secondary'}"
+                           th:classappend="${#httpServletRequest.requestURI.startsWith('/products') ? 'text-white' : 'text-secondary'}"
                            class="nav-link px-2">Home</a>
                     </li>
                     <li>
