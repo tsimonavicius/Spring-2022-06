@@ -37,6 +37,23 @@
                            th:classappend="${#httpServletRequest.requestURI eq '/about' ? 'text-white' : 'text-secondary'}"
                            class="nav-link px-2">About</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Language
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" th:href="@{''(lang='lt')}">
+                                    <img th:src="@{/images/language_lt.png}" class="language-selector"/>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" th:href="@{''(lang='en')}">
+                                    <img th:src="@{/images/language_en.png}" class="language-selector"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
 
                 <div class="text-end">
