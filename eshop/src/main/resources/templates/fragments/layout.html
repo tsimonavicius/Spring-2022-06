@@ -57,8 +57,14 @@
                 </ul>
 
                 <div class="text-end">
-                    <a th:href="@{/cart}" class="fs-4 nav-link px-2 text-secondary cart-link">
+                    <a th:href="@{/cart}" class="fs-4 nav-link px-2 text-secondary cart-link position-relative">
                         <i class="fa-solid fa-cart-shopping"></i>
+                        <span th:if="${session.cart?.size gt 0}"
+                              th:text="${session.cart.size}"
+                              class="position-absolute p-1 top-0 start-1 translate-middle badge rounded-pill bg-danger">
+                            0
+                            <span class="visually-hidden">0</span>
+                        </span>
                     </a>
                     <button type="button" class="btn btn-outline-light me-2">Login</button>
                     <button type="button" class="btn btn-warning">Sign-up</button>

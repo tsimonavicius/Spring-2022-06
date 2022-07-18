@@ -46,6 +46,12 @@ public class Cart {
         return items.size() > 0;
     }
 
+    public int size() {
+        return items.stream()
+                .mapToInt(CartItem::getQuantity)
+                .sum();
+    }
+
     @Data
     public static class CartItem {
         private final Product product;
