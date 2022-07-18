@@ -1,14 +1,10 @@
 package lt.codeacademy.eshop.cart;
 
 import lombok.AllArgsConstructor;
-import lt.codeacademy.eshop.products.Product;
 import lt.codeacademy.eshop.products.ProductsService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -25,26 +21,8 @@ public class CartController {
     }
 
     @GetMapping
-    public String getCart(Model model) {
+    public String getCart(@ModelAttribute Cart cart) {
 
-        model.addAttribute("cart", new Cart(Arrays.asList(
-                new Cart.CartItem(
-                        new Product(
-                                UUID.randomUUID(),
-                                "Samsung",
-                                "aaaa",
-                                BigDecimal.valueOf(100),
-                                ""),
-                    2),
-                new Cart.CartItem(
-                        new Product(
-                                UUID.randomUUID(),
-                                "Iphone",
-                                "aaaa",
-                                BigDecimal.valueOf(250),
-                                ""),
-                        3)
-        )));
         return "cart";
     }
 
