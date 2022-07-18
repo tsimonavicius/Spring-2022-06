@@ -1,18 +1,28 @@
 package lt.codeacademy.eshop.cart;
 
+import lombok.AllArgsConstructor;
 import lt.codeacademy.eshop.products.Product;
+import lt.codeacademy.eshop.products.ProductsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.UUID;
 
+@AllArgsConstructor
 @Controller
 @RequestMapping("/cart")
+@SessionAttributes("cart")
 public class CartController {
+
+    private final ProductsService productsService;
+
+    @ModelAttribute("cart")
+    Cart initCart() {
+        return new Cart();
+    }
 
     @GetMapping
     public String getCart(Model model) {
@@ -36,5 +46,13 @@ public class CartController {
                         3)
         )));
         return "cart";
+    }
+
+    @PostMapping("/{id}")
+    public String addToCart(@ModelAttribute Cart cart, @PathVariable UUID id) {
+
+        cart.add(productsService.getProduct(id));
+
+        return "redirect:/products";
     }
 }
