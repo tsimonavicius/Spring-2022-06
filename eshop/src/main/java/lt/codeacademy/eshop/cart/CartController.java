@@ -42,7 +42,7 @@ public class CartController {
 
         if (cart.hasItems()) {
             sessionStatus.setComplete();
-            redirectAttributes.addAttribute("message", "Order received!");
+            redirectAttributes.addAttribute("message", "cartPage.orderReceived");
             return "redirect:/products";
         }
 
