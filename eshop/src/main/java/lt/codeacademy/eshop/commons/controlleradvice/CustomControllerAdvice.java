@@ -1,4 +1,4 @@
-package lt.codeacademy.eshop.products;
+package lt.codeacademy.eshop.commons.controlleradvice;
 
 import lt.codeacademy.eshop.products.errors.CustomException;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;

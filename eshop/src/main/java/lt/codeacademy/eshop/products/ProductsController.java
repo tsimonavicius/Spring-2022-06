@@ -22,17 +22,11 @@ import java.util.UUID;
 public class ProductsController {
 
     private final ProductsService productsService;
-    private final CompanyInfo companyInfo;
     private final CustomProductValidator productValidator;
 
     @InitBinder(value = "product")
     void initStudentValidator(WebDataBinder binder) {
         binder.addValidators(productValidator);
-    }
-
-    @ModelAttribute("companyInfo")
-    public CompanyInfo addCompanyDataToModel() {
-        return companyInfo;
     }
 
     @GetMapping
