@@ -42,6 +42,10 @@ public class Cart {
         }
     }
 
+    public boolean hasItems() {
+        return items.size() > 0;
+    }
+
     @Data
     public static class CartItem {
         private final Product product;
