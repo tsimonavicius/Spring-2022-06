@@ -4,6 +4,39 @@
       th:replace="fragments/layout(title=#{cartPage.title}, content=~{:: #main})">
 
 <div id="main">
-    Hello, World1!!
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cartItem : ${cart.items}">
+                <td th:text="${cartItem.product.name}">Samsung S23</td>
+                <td th:text="${cartItem.product.price}">10000.00</td>
+                <td th:text="${cartItem.quantity}">2</td>
+                <td th:text="${cartItem.totalPrice}">20000.00</td>
+                <td>
+                    <form method="POST">
+                        <button th:text="'Remove'"></button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3"></td>
+                <td>
+                    Sum:
+                    <span th:text="${cart.sum}">20000</span>
+                </td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
 </div>
 </html>
