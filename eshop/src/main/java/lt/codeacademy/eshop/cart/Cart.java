@@ -17,13 +17,7 @@ public class Cart {
                 // items = [ { totalPrice: 100 * 2 = 200 }, { totalPrice: 250 * 3 = 750 }, ... ]
         return items.stream()
                 .map(CartItem::getTotalPrice) // [ 200, 750, ... ]
-                .reduce(BigDecimal.ZERO, (total, cartItemPrice) -> {
-                    System.out.println("--------------------------");
-                    System.out.println("total: " + total);
-                    System.out.println("cartItemPrice: " + cartItemPrice);
-
-                    return total.add(cartItemPrice);
-                });
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
                     // 0 + 1000 = 1000
                     //              +
                     //              150 = 1150
