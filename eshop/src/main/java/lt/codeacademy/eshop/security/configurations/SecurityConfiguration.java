@@ -17,16 +17,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.formLogin()
                 .permitAll()
-                .loginPage("/prisijungimas")
-                .loginProcessingUrl("/prisijungti")
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/products")
-                .failureUrl("/prisijungimas?error=login.failed")
-                .passwordParameter("slaptazodis")
-                .usernameParameter("vartotojoVardas");
+                .failureUrl("/login?error=login.failed");
 
         http.logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/prisijungimas?logout");
+                .logoutSuccessUrl("/login?logout");
     }
 
     @Override
