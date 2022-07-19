@@ -4,6 +4,10 @@
 
 <body>
     <main>
+        <div th:if="${param.error ne null}" class="alert alert-danger" role="alert">
+            <span th:text="#{${param.error}}"></span>
+        </div>
+
         <form th:action="@{/prisijungti}" method="POST">
             <div>
                 <label for="user">User:</label>
