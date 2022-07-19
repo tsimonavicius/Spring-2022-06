@@ -13,16 +13,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .anyRequest().authenticated();
-
-        http.formLogin()
+                .anyRequest().authenticated()
+                .and()
+            .formLogin()
                 .permitAll()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/products")
-                .failureUrl("/login?error=login.failed");
-
-        http.logout()
+                .failureUrl("/login?error=login.failed")
+                .and()
+            .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout");
     }
