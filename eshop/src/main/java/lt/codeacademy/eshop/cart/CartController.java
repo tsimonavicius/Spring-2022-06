@@ -11,7 +11,6 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @Controller
-@RequestMapping("/cart")
 @SessionAttributes("cart")
 public class CartController {
 
@@ -22,13 +21,13 @@ public class CartController {
         return new Cart();
     }
 
-    @GetMapping
+    @GetMapping("/public/cart")
     public String getCart(@ModelAttribute Cart cart) {
 
         return "cart";
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/public/cart/{id}")
     public String addToCart(@ModelAttribute Cart cart, @PathVariable UUID id) {
 
         cart.add(productsService.getProduct(id));
@@ -36,7 +35,7 @@ public class CartController {
         return "redirect:/products";
     }
 
-    @PostMapping
+    @PostMapping("/private/cart")
     public String order(@ModelAttribute Cart cart,
                         SessionStatus sessionStatus, RedirectAttributes redirectAttributes) {
 

@@ -28,12 +28,12 @@
                            class="nav-link px-2">Home</a>
                     </li>
                     <li>
-                        <a th:href="@{/products}" th:text="#{menu.products}"
-                           th:classappend="${#httpServletRequest.requestURI.startsWith('/products') ? 'text-white' : 'text-secondary'}"
+                        <a th:href="@{/public/products}" th:text="#{menu.products}"
+                           th:classappend="${#httpServletRequest.requestURI.contains('/products') ? 'text-white' : 'text-secondary'}"
                            class="nav-link px-2">Home</a>
                     </li>
                     <li>
-                        <a th:href="@{/about}" th:text="#{menu.about}"
+                        <a th:href="@{/public/about}" th:text="#{menu.about}"
                            th:classappend="${#httpServletRequest.requestURI eq '/about' ? 'text-white' : 'text-secondary'}"
                            class="nav-link px-2">About</a>
                     </li>
@@ -57,7 +57,7 @@
                 </ul>
 
                 <div class="text-end">
-                    <a th:href="@{/cart}" class="fs-4 nav-link px-2 text-secondary cart-link position-relative">
+                    <a th:href="@{/public/cart}" class="fs-4 nav-link px-2 text-secondary cart-link position-relative">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <span th:if="${session.cart?.size gt 0}"
                               th:text="${session.cart.size}"

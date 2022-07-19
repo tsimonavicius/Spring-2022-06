@@ -13,7 +13,7 @@
             <h1>No Products Found!</h1>
         </div>
         <div>
-            <form method="GET" th:action="@{/products/search}" class="form-inline">
+            <form method="GET" th:action="@{/public/products/search}" class="form-inline">
                 <input name="name" th:value="${param.name}">
                 <button th:text="Search">Search</button>
             </form>
@@ -49,11 +49,11 @@
                 <td th:text="${product.description}">Very good, very nice</td>
                 <td th:text="${product.price}">10000.00</td>
                 <td>
-                    <a th:href="@{/products/{id}(id=${product.id})}" th:text="'Edit'">Edit</a>
-                    <form th:action="@{/products/{id}/delete(id=${product.id})}" method="POST">
+                    <a th:href="@{/private/products/{id}(id=${product.id})}" th:text="'Edit'">Edit</a>
+                    <form th:action="@{/private/products/{id}/delete(id=${product.id})}" method="POST">
                         <button th:text="'Delete'"></button>
                     </form>
-                    <form th:action="@{/cart/{id}(id=${product.id})}" method="POST">
+                    <form th:action="@{/public/cart/{id}(id=${product.id})}" method="POST">
                         <button class="btn btn-primary">
                             <i class="fa-solid fa-cart-plus"></i>
                         </button>
@@ -87,7 +87,7 @@
             </li>
         </ul>
         <div>
-            <a th:href="@{/products/create}" th:text="'Create Product'">Create Product</a>
+            <a th:href="@{/private/products/create}" th:text="'Create Product'">Create Product</a>
         </div>
     </div>
 

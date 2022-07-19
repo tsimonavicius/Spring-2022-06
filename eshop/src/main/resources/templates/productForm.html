@@ -4,7 +4,7 @@
       th:replace="fragments/layout(title='Create Product', content=~{:: #main})">
 
 <div id="main">
-    <form method="POST" th:object="${product}">
+    <form method="POST" th:object="${product}" th:action="@{/private/products/create}">
         <div class="mb-3">
             <label th:text="'Name'" for="name"></label>
             <input id="name" th:field="*{name}" class="form-control" th:errorclass="error">

@@ -18,7 +18,6 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @Controller
-@RequestMapping("/products")
 public class ProductsController {
 
     private final ProductsService productsService;
@@ -29,7 +28,7 @@ public class ProductsController {
         binder.addValidators(productValidator);
     }
 
-    @GetMapping
+    @GetMapping("/public/products")
     public String getProducts(@PageableDefault(size = 3) Pageable pageable, Model model) {
 
         Page<Product> products = productsService.getProducts(pageable);
@@ -38,14 +37,14 @@ public class ProductsController {
         return "products";
     }
 
-    @GetMapping("/create")
+    @GetMapping("/private/products/create")
     public String openProductForm(Model model) {
 
         model.addAttribute("product", new Product());
         return "productForm";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/private/products/create")
     public String createProduct(@Valid Product product, BindingResult errors, RedirectAttributes redirectAttributes) {
 
         if (errors.hasErrors()) {
@@ -60,7 +59,7 @@ public class ProductsController {
         return "redirect:/products";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/private/products/{id}")
     public String openProduct(@PathVariable UUID id, Model model) {
 
         model.addAttribute("product", productsService.getProduct(id));
@@ -68,7 +67,7 @@ public class ProductsController {
         return "productForm";
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/private/products/{id}")
     public String updateProduct(Product product, Model model) {
 
         productsService.updateProduct(product);
@@ -78,7 +77,7 @@ public class ProductsController {
         return getProducts(null, model);
     }
 
-    @PostMapping("/{id}/delete")
+    @PostMapping("/private/products/{id}/delete")
     public String deleteProduct(@PathVariable UUID id, RedirectAttributes redirectAttributes) {
 
         Product product = productsService.deleteProduct(id);
@@ -88,7 +87,7 @@ public class ProductsController {
         return "redirect:/products";
     }
 
-    @GetMapping("/search")
+    @GetMapping("/public/products/search")
     public String search(@RequestParam(required = false) String name, Model model) {
 
         model.addAttribute("products",

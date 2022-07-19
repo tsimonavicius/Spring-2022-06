@@ -21,7 +21,7 @@
                 <td th:text="${cartItem.quantity}">2</td>
                 <td th:text="${cartItem.totalPrice}">20000.00</td>
                 <td>
-                    <form method="POST">
+                    <form method="POST" th:action="@{/public/cart/remove}">
                         <button th:text="'Remove'"></button>
                     </form>
                 </td>
@@ -38,7 +38,7 @@
             </tr>
         </tfoot>
     </table>
-    <form method="POST">
+    <form method="POST" th:action="@{/private/cart/order}">
         <button th:text="'Order'"></button>
     </form>
 </div>
