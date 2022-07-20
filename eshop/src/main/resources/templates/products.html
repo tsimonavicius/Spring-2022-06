@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       th:replace="fragments/layout(title=#{productsPage.title}, content=~{:: #main})">
 
     <div id="main">
@@ -86,7 +87,7 @@
                 </a>
             </li>
         </ul>
-        <div>
+        <div sec:authorize="hasRole('ADMIN')">
             <a th:href="@{/private/products/create}" th:text="'Create Product'">Create Product</a>
         </div>
     </div>
