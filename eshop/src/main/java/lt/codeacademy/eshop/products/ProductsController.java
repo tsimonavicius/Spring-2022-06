@@ -6,6 +6,7 @@ import lt.codeacademy.eshop.products.validations.CustomProductValidator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,6 +38,7 @@ public class ProductsController {
         return "products";
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/private/products/create")
     public String openProductForm(Model model) {
 
