@@ -74,6 +74,7 @@
 
                     <form th:action="@{/logout}" method="POST" class="d-inline-block"
                           sec:authorize="isAuthenticated()">
+                        <span sec:authentication="principal.fullName"></span>
                         <button type="submit" class="btn btn-outline-light me-2">Logout</button>
                     </form>
                 </div>
