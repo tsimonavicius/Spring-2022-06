@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -66,10 +67,13 @@
                             <span class="visually-hidden">0</span>
                         </span>
                     </a>
-                    <button type="button" class="btn btn-outline-light me-2">Login</button>
-                    <button type="button" class="btn btn-warning">Sign-up</button>
+                    <th:block sec:authorize="isAnonymous()">
+                        <a th:href="@{/login}" class="btn btn-outline-light me-2">Login</a>
+                        <button type="button" class="btn btn-warning">Sign-up</button>
+                    </th:block>
 
-                    <form th:action="@{/logout}" method="POST">
+                    <form th:action="@{/logout}" method="POST" class="d-inline-block"
+                          sec:authorize="isAuthenticated()">
                         <button type="submit" class="btn btn-outline-light me-2">Logout</button>
                     </form>
                 </div>
