@@ -3,11 +3,14 @@ package lt.codeacademy.eshop.products;
 import lombok.AllArgsConstructor;
 import lt.codeacademy.eshop.products.errors.ProductNotFoundException;
 import lt.codeacademy.eshop.products.validations.CustomProductValidator;
+import lt.codeacademy.eshop.security.models.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,8 +18,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -32,7 +35,10 @@ public class ProductsController {
     }
 
     @GetMapping("/public/products")
-    public String getProducts(@PageableDefault(size = 3) Pageable pageable, Model model) {
+    public String getProducts(@PageableDefault(size = 3) Pageable pageable, Model model,
+                              Principal principal, Authentication authentication, @AuthenticationPrincipal User user) {
+
+        SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Page<Product> products = productsService.getProducts(pageable);
         model.addAttribute("products", products);
@@ -78,7 +84,7 @@ public class ProductsController {
 
         model.addAttribute("message", String.format("Product '%s' successfully updated!", product.getName()));
 
-        return getProducts(null, model);
+        return "redirect:/public/products";
     }
 
     @PostMapping("/private/products/{id}/delete")
