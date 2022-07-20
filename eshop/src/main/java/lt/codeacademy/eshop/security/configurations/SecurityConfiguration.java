@@ -1,20 +1,24 @@
 package lt.codeacademy.eshop.security.configurations;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.h2.H2ConsoleProperties;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final H2ConsoleProperties h2ConsoleProperties;
-
-    public SecurityConfiguration(H2ConsoleProperties h2ConsoleProperties) {
-        this.h2ConsoleProperties = h2ConsoleProperties;
-    }
+    @Autowired
+    private H2ConsoleProperties h2ConsoleProperties;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -43,4 +47,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                 .antMatchers(h2ConsoleProperties.getPath() + "/**");
     }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+        PasswordEncoder encoder = PasswordEncoderFactories
+                .createDelegatingPasswordEncoder();
+
+        auth
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(encoder);
+    }
+
 }
