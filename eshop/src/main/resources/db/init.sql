@@ -14,3 +14,16 @@ INSERT INTO PRODUCT (id, name, description, price) VALUES
     ('00000000-0000-0000-0000-000000000013', 'Samsung S55', 'Naujausias Samsung!', 4999.99),
     ('00000000-0000-0000-0000-000000000014', 'Samsung S55', 'Naujausias Samsung!', 4999.99)
     ;
+
+INSERT INTO Users VALUES
+    ('user', 'Useris', '{bcrypt}$2a$12$GtVeSIV16y1OOBdYJES5HOIJkxWBLNKDlqqSt7iz0TVg0..XE3nb6', 'Useriauskas'), /* password=pass */
+    ('admin', 'Adminas', '{bcrypt}$2a$12$b8PbmpdeCXu5HOQPWDOmveN9TsX9T/czvtL5hOEAvpZM1.DFKjmEW', 'Adminiauskas'); /* password=admin */
+
+INSERT INTO Role VALUES
+    ('USER'),
+    ('ADMIN');
+
+INSERT INTO users_roles VALUES
+    ('user', 'USER'),
+    ('admin', 'USER'),
+    ('admin', 'ADMIN');
